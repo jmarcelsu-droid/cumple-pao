@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- importante para móviles -->
+  <title>Acceso</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(to bottom right, #c9d6ff, #e2e2e2);
+    }
+
+    .login {
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 100%;
+      max-width: 350px;   /* en PC no pasa de 350px */
+    }
+
+    .login h2 {
+      font-size: 1.3em;
+      margin-bottom: 15px;
+    }
+
+    input[type="password"] {
+      padding: 10px;
+      margin-top: 10px;
+      width: 100%;
+      border: 1px solid #aaa;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+
+    .login img {
+      margin-top: 15px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 250px;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #b30059;
+      color: #fff;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #ff3366;
+    }
+
+    #mensaje {
+      margin-top: 10px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login">
+    <h2>  Ingresa la contraseña Pao :D </h2>
+    <h2>   🌷                           </h2>
+    <input type="password" id="clave" placeholder="Contraseña">
+
+    <!-- Imagen centrada -->
+    <img src="https://i.imgur.com/ufFyWdJ.jpeg" alt="Imagen decorativa">
+
+    <!-- Botón justo debajo de la imagen -->
+    <button onclick="verificar()">Entrar</button>
+    <p id="mensaje" style="color:red; display:none;">Contraseña incorrecta</p>
+  </div>
+
+  <script>
+    function verificar() {
+      const pass = document.getElementById("clave").value;
+      if (pass === "10/09") {  // 🔑 contraseña
+        // === CONTENIDO DE LA SEGUNDA PARTE (TEXTO ORIGINAL + GLOBOS) ===
+        document.body.innerHTML = `
+          <h1>Hola,Pao~🌸</h1>
+          <p>
+            No sé bien cómo es esto, estoy practicando hahaha…<br>
+            Pero no sé si es tu humor o porque reniegas de la nada, pero caes bien xDD..<br>
+            Solo para decirte felíz cumple que lo pases bonito y.<br>
+            que todo salgue bien en todo lo que anelas.<br>
+            El Perú primero(no sé que mas decir) :3 .
+          </p>
+          <div style="font-size:3em; color:#ff3366; animation:beat 1.5s infinite;">🎂</div>
+          <footer style="margin-top:50px;">Con cariño,<br>De Jesús xD.</footer>
+
+          <!-- Contenedor de globos -->
+          <div id="globos"></div>
+
+          <style>
+            body {
+              margin:0; padding:0;
+              background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
+              font-family: 'Georgia', serif;
+              color: #3a3a3a;
+              display:flex;
+              flex-direction:column;
+              align-items:center;
+              justify-content:center;
+              min-height:100vh;
+              text-align:center;
+              animation: fadeIn 3s ease;
+              overflow:hidden;
+              position: relative;
+            }
+            @keyframes beat {0%,100%{transform:scale(1);}50%{transform:scale(1.3);}}
+            @keyframes fadeIn {from{opacity:0;}to{opacity:1;}}
+
+            /* Capa de globos que salen desde abajo */
+            #globos {
+              position: fixed;
+              left: 0;
+              bottom: 0;           /* salen desde abajo */
+              width: 100vw;
+              height: 100vh;
+              pointer-events: none;
+              overflow: hidden;
+            }
+
+            .globo {
+              position: absolute;
+              bottom: -140px;      /* inicia debajo para que no se corte */
+              width: 80px;         /* tamaño base (luego lo ajustamos en JS) */
+              height: 80px;
+              background: url('https://cdn-icons-png.flaticon.com/512/599/599901.png') no-repeat center;
+              background-size: contain;
+              animation: subir linear forwards;
+              opacity: 1;
+            }
+
+            @keyframes subir {
+              from { transform: translateY(0); opacity:1; }
+              to   { transform: translateY(-120vh); opacity:0; }
+            }
+          </style>
+        `;
+
+        // === JS PARA CREAR LOS GLOBOS (EJECUTA DE VERDAD) ===
+        const cont = document.getElementById('globos');
+
+        function crearGlobo() {
+          const g = document.createElement('div');
+          g.className = 'globo';
+
+          // posición horizontal aleatoria
+          g.style.left = Math.random() * 95 + 'vw';
+
+          // tamaño aleatorio manteniendo proporción
+          const size = 50 + Math.floor(Math.random() * 60); // 50–110px
+          g.style.width = size + 'px';
+          g.style.height = size + 'px';
+
+          // duración de subida aleatoria (más lento/rápido)
+          const dur = 6 + Math.random() * 5; // 6–11s
+          g.style.animationDuration = dur + 's';
+
+          cont.appendChild(g);
+
+          // limpiar después
+          setTimeout(() => g.remove(), (dur + 1) * 1000);
+        }
+
+        // Crear varios al inicio y luego de forma continua
+        for (let i = 0; i < 6; i++) crearGlobo();
+        setInterval(crearGlobo, 900);
+
+      } else {
+        document.getElementById("mensaje").style.display = "block";
+      }
+    }
+  </script>
+
+</body>
+</html>
+
+   
